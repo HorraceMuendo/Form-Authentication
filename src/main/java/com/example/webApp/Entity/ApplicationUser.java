@@ -1,27 +1,31 @@
-package com.example.webApp.Securityconfig;
+package com.example.webApp.Entity;
 
+import com.example.webApp.Roles.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-
-public class appUser implements UserDetails {
-
+@Entity
+public class ApplicationUser implements UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
     private String name;
     private String username;
     private String email;
     private String password;
-    private AppUserRole appUserRole;
+   @Enumerated(EnumType.STRING)
+    private UserRole userRole;
     private Boolean locked;
     private Boolean enabled;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority=new SimpleGrantedAuthority(appUserRole.name());
+        SimpleGrantedAuthority authority=new SimpleGrantedAuthority(userRole.name());
         return Collections.singleton(authority);
     }
 
@@ -57,21 +61,21 @@ public class appUser implements UserDetails {
 
 // getter ,setter and constructors
 
-    public appUser() {
+    public ApplicationUser() {
     }
 
-    public appUser(String name,
-                   String username,
-                   String email,
-                   String password,
-                   AppUserRole appUserRole,
-                   Boolean locked,
-                   Boolean enabled) {
+    public ApplicationUser(String name,
+                           String username,
+                           String email,
+                           String password,
+                           UserRole userRole,
+                           Boolean locked,
+                           Boolean enabled) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.appUserRole = appUserRole;
+        this.userRole = userRole;
         this.locked = locked;
         this.enabled = enabled;
     }
@@ -108,12 +112,12 @@ public class appUser implements UserDetails {
         this.password = password;
     }
 
-    public AppUserRole getAppUserRole() {
-        return appUserRole;
+    public UserRole getAppUserRole() {
+        return userRole;
     }
 
-    public void setAppUserRole(AppUserRole appUserRole) {
-        this.appUserRole = appUserRole;
+    public void setAppUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     public Boolean getLocked() {
