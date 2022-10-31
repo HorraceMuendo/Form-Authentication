@@ -23,7 +23,7 @@ public class RegistrationController {
     }
 
     private String Register(@RequestBody RegistrationRequest request){
-        return RegistrationService.
+        return registrationService.register(request);
     }
 
 

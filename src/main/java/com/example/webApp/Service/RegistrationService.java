@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RegistrationService {
-    private String register (RegistrationRequest request){
+    public String register (RegistrationRequest request){
         return "registered";
     }
 }
