@@ -21,7 +21,7 @@ public class RegistrationController {
         this.userRepository = userRepository;
         this.registrationService = registrationService;
     }
-
+    @PostMapping()
     private String Register(@RequestBody RegistrationRequest request){
         return registrationService.register(request);
     }
